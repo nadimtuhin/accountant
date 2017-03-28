@@ -30,8 +30,8 @@ const initialState = {
     items: {
       'month/year': {
         id: 'month/year',
-        income: 20000,
-        expense: 200,
+        income: 20000, // cache
+        expense: 200, // cache
         year: 2017,
         month: 0,
         transactions: ['uuid-1', 'uuid-2']
