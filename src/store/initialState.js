@@ -17,12 +17,13 @@ const initialState = {
   wallets: {
     order: ['dbbl', 'cash'],
     items: {
-      dbbl: { name: 'DBBL', description: '', openingBalance: 0 },
-      cash: { name: 'CASH', description: '', openingBalance: 0 },
+      dbbl: { id: 'dbbl', name: 'DBBL', description: '', openingBalance: 0 },
+      cash: { id: 'cash', name: 'CASH', description: '', openingBalance: 0 },
     }
   },
   transactions: {
-
+    'uuid-1': { id: 'uuid-1', type: EXPENSE, category: 'transportation', wallet: 'cash', amount: 200, remark: 'pathao ride to office', event: 'tour2017' },
+    'uuid-2': { id: 'uuid-2', type: INCOME, category: 'salary', wallet: 'cash', amount: 200000, event: null },
   },
   events: {
     active: 'tour2017',
