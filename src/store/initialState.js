@@ -43,6 +43,31 @@ const initialState = {
     items: {
       'tour2017': { name: 'Tour 2017', startDate: '1st January', endDate: '31st December' }
     }
+  },
+  budgets: {
+    order: ['b-uuid-1'],
+    items: {
+      'b-uuid-1': {
+        category: 'transportation',
+        amount: 2000,
+        start: 'start/date',
+        end: 'end/date',
+      }
+    }
+  },
+  savings: {
+    order: ['s-uuid-1'],
+    items: {
+      's-uuid-1': {
+        name: 'Kindle',
+        description: 'buy kindle in 4 months',
+        when: 'every1month',
+        amount: 3000
+      }
+    }
+  },
+  settings: {
+    travelMode: false,
   }
 };
 
