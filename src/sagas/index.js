@@ -1,8 +1,4 @@
-export function* appSaga() {
-    yield [
-
-    ];
-}
+import appSaga from './appSaga';
 
 export default [
     appSaga
