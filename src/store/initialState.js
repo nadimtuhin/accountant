@@ -1,17 +1,20 @@
-const LOAN = 'LOAN';
-const DEBT = 'DEBT';
-const EXPENSE = 'EXPENSE';
-const INCOME = 'INCOME';
+import {
+  DEBT, DEBT_COLLECTION, EXPENSE, INCOME, LDRD, LOAN, REPAYMENT,
+  SALARY
+} from '../constants/terms';
 
 const initialState = {
   categories: {
-    [EXPENSE]: [LOAN, 'transportation'],
-    [INCOME]: [DEBT, 'salary'],
+    [EXPENSE]: [LOAN, REPAYMENT, 'transportation'],
+    [INCOME]: [DEBT, DEBT_COLLECTION, SALARY],
+    [LDRD]: [LOAN, DEBT, REPAYMENT, DEBT_COLLECTION],
     items: {
       [LOAN]: { picture: 'A.png', name: 'Loan', id: LOAN },
-      [DEBT]: { picture: 'B.png', name: 'Income', id: DEBT },
+      [DEBT]: { picture: 'B.png', name: 'Debt', id: DEBT },
+      [REPAYMENT]: { picture: 'B.png', name: 'Repayment', id: REPAYMENT },
+      [DEBT_COLLECTION]: { picture: 'B.png', name: 'Debt Collection', id: DEBT_COLLECTION },
       transportation: { picture: 'C.png', name: 'Transportation', id: 'transportation' },
-      salary: { picture: 'D.png', name: 'Salary', id: 'salary' },
+      [SALARY]: { picture: 'D.png', name: 'Salary', id: SALARY },
     }
   },
   wallets: {
@@ -22,11 +25,29 @@ const initialState = {
     }
   },
   transactions: {
-    'uuid-1': { id: 'uuid-1', date: 'date', type: EXPENSE, categoryId: 'transportation', wallet: 'cash', amount: 200, remark: 'pathao ride to office', event: 'tour2017' },
-    'uuid-2': { id: 'uuid-2', date: 'date', type: INCOME, categoryId: 'salary', wallet: 'cash', amount: 200000, remark: '', event: null },
+    'uuid-1': {
+      id: 'uuid-1',
+      date: 'date',
+      type: EXPENSE,
+      categoryId: 'transportation',
+      wallet: 'cash',
+      amount: 200,
+      remark: 'pathao ride to office',
+      event: 'tour2017'
+    },
+    'uuid-2': {
+      id: 'uuid-2',
+      date: 'date',
+      type: INCOME,
+      categoryId: SALARY,
+      wallet: 'cash',
+      amount: 200000,
+      remark: '',
+      event: null
+    },
   },
   months: {
-    orders: ['month/year'],
+    order: ['month/year'],
     items: {
       'month/year': {
         id: 'month/year',
