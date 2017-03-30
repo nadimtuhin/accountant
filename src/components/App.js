@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Transactions from './Transactions/index';
+import Transactions from './Transactions';
 
 class App extends Component {
   render() {
