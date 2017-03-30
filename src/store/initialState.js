@@ -22,8 +22,8 @@ const initialState = {
     }
   },
   transactions: {
-    'uuid-1': { id: 'uuid-1', date: 'date', type: EXPENSE, category: 'transportation', wallet: 'cash', amount: 200, remark: 'pathao ride to office', event: 'tour2017' },
-    'uuid-2': { id: 'uuid-2', date: 'date', type: INCOME, category: 'salary', wallet: 'cash', amount: 200000, remark: '', event: null },
+    'uuid-1': { id: 'uuid-1', date: 'date', type: EXPENSE, categoryId: 'transportation', wallet: 'cash', amount: 200, remark: 'pathao ride to office', event: 'tour2017' },
+    'uuid-2': { id: 'uuid-2', date: 'date', type: INCOME, categoryId: 'salary', wallet: 'cash', amount: 200000, remark: '', event: null },
   },
   months: {
     orders: ['month/year'],
