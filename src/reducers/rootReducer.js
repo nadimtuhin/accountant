@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
+import transactionsReducer from './transactionsReducer';
+import walletReducer from './walletReducer';
+import categoryReducer from './categoryReducer';
+import monthsReducer from './monthsReducer';
 
-function appReducers(state = 'test') {
-    return state;
-}
-
-// export default combineReducers({
-//     app: appReducers
-// });
-
-export default appReducers;
+export default combineReducers({
+  wallet: walletReducer,
+  category: categoryReducer,
+  months: monthsReducer,
+  transactions: transactionsReducer,
+});
