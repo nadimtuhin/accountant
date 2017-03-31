@@ -4,12 +4,12 @@ export const defaultWalletSelector = (state) => state.wallet.items[state.wallet.
 export const walletsSelector = (state) => state.wallet.order.map(wallet => state.wallet.items[wallet]);
 export const walletSelector = (state, { walletId } ) => state.wallet.items[walletId];
 
-export const categorySelector = (state, { categoryId }) => state.categories.items[categoryId];
+export const categorySelector = (state, { categoryId }) => state.category.items[categoryId];
 
 export const categoriesSelector = (state) => ({
-  [EXPENSE]: state.categories[EXPENSE].map(categoryId => categorySelector(state, { categoryId })),
-  [INCOME]: state.categories[INCOME].map(categoryId => categorySelector(state, { categoryId })),
-  [LDRD]: state.categories[LDRD].map(categoryId => categorySelector(state, { categoryId })),
+  [EXPENSE]: state.category[EXPENSE].map(categoryId => categorySelector(state, { categoryId })),
+  [INCOME]: state.category[INCOME].map(categoryId => categorySelector(state, { categoryId })),
+  [LDRD]: state.category[LDRD].map(categoryId => categorySelector(state, { categoryId })),
 });
 
 export const transactionsSelector = (state, props) => {

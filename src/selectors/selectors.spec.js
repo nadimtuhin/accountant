@@ -8,7 +8,7 @@ import { EXPENSE, INCOME, LDRD, LOAN } from '../constants/terms';
 
 test('test categorySelector', () => {
   const result = categorySelector(state, { categoryId: LOAN });
-  const expectedResult = state.categories.items[LOAN];
+  const expectedResult = state.category.items[LOAN];
 
   expect(result).toEqual(expectedResult);
 });

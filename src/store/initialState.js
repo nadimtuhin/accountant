@@ -4,7 +4,7 @@ import {
 } from '../constants/terms';
 
 const initialState = {
-  categories: {
+  category: {
     [EXPENSE]: [LOAN, REPAYMENT, 'transportation'],
     [INCOME]: [DEBT, DEBT_COLLECTION, SALARY],
     [LDRD]: [LOAN, DEBT, REPAYMENT, DEBT_COLLECTION],
