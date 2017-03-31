@@ -95,6 +95,6 @@ class AddTransaction extends Component {
 
 export default connect(state => ({
   ...categoriesSelector(state),
-  month: state.months.order[0],
+  month: 'year/month',
   wallet: state.wallets.order[0],
 }))(AddTransaction);

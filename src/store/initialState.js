@@ -47,16 +47,13 @@ const initialState = {
     },
   },
   months: {
-    order: ['month/year'],
-    items: {
-      'month/year': {
-        id: 'month/year',
-        income: 20000, // cache
-        expense: 200, // cache
-        year: 2017,
-        month: 0,
-        transactions: ['uuid-1', 'uuid-2']
-      }
+    'year/month': {
+      id: 'year/month',
+      income: 20000, // cache
+      expense: 200, // cache
+      year: 2017,
+      month: 0,
+      transactions: ['uuid-1', 'uuid-2']
     }
   },
   events: {
