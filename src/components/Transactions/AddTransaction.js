@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { categoriesSelector } from '../../selectors/index';
-import { DEBT, EXPENSE, INCOME, LDRD, LOAN } from '../../constants/terms';
+import { categoriesSelector, defaultWalletSelector } from '../../selectors/index';
+import { EXPENSE, INCOME, LDRD } from '../../constants/terms';
 import uuid from 'uuid';
 import { bindActionCreators } from 'redux';
 import { addTransaction } from '../../actions/transactionActionCreators';
@@ -94,8 +94,8 @@ class AddTransaction extends Component {
 }
 
 export default connect(state => ({
-  ...categoriesSelector(state),
-  wallet: state.wallets.order[0],
+  categories: categoriesSelector(state),
+  wallet: defaultWalletSelector(state),
 }), bindActionCreators.bind(null, {
   addTransaction
 }))(AddTransaction);

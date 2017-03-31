@@ -11,7 +11,7 @@ test('test category selector', () => {
 });
 
 test('test categoriesSelector', () => {
-  const result = categoriesSelector(state).categories;
+  const result = categoriesSelector(state);
   const expectedResult = true;
 
   expect(isArray(result[EXPENSE])).toEqual(expectedResult);
