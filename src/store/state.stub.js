@@ -56,13 +56,13 @@ const initialState = {
       transactions: ['uuid-1', 'uuid-2']
     }
   },
-  events: {
-    active: 'tour2017',
+  event: {
+    order: ['tour2017'],
     items: {
       'tour2017': { name: 'Tour 2017', startDate: '1st January', endDate: '31st December' }
     }
   },
-  budgets: {
+  budget: {
     order: ['b-uuid-1'],
     items: {
       'b-uuid-1': {
