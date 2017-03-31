@@ -10,8 +10,8 @@ export const categoriesSelector = (state) => ({
   }
 });
 
-export const transactionsSelector = state => {
-  const month = state.months['year/month'];
+export const transactionsSelector = (state, props ) => {
+  const month = state.months[props.month];
   const transactions = month.transactions
     .map(transactionId => state.transactions[transactionId])
     .map(transaction => ({

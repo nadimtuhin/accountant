@@ -5,7 +5,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Transactions />
+        <Transactions month={'year/month'} />
       </div>
     );
   }

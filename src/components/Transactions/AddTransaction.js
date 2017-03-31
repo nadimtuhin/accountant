@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { categoriesSelector } from '../../selectors/index';
 import { DEBT, EXPENSE, INCOME, LDRD, LOAN } from '../../constants/terms';
 import uuid from 'uuid';
+import { bindActionCreators } from 'redux';
+import { addTransaction } from '../../actions/transactionActionCreators';
 
 class AddTransaction extends Component {
   static propTypes = {
     categories: PropTypes.object.isRequired,
-    month: PropTypes.string.isRequired,
+    addTransaction: PropTypes.func.isRequired
   };
 
-  state = {
-    type: EXPENSE
-  };
+  state = { type: EXPENSE };
 
   renderCategory = (category) => {
     return (
@@ -40,7 +40,6 @@ class AddTransaction extends Component {
 
     const transaction = {
       id: uuid(),
-      month: this.props.month,
       wallet: this.props.wallet,
       date: new Date(),
       event: null,
@@ -50,6 +49,7 @@ class AddTransaction extends Component {
     };
 
     console.log(transaction);
+    this.props.addTransaction(transaction);
   };
 
   handleTypeChange = (event) => {
@@ -95,6 +95,7 @@ class AddTransaction extends Component {
 
 export default connect(state => ({
   ...categoriesSelector(state),
-  month: 'year/month',
   wallet: state.wallets.order[0],
+}), bindActionCreators.bind(null, {
+  addTransaction
 }))(AddTransaction);
