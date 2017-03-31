@@ -10,6 +10,7 @@ class Transaction extends Component {
 
     return (
       <tr key={transaction.id}>
+        <td>{transaction.date.toString()}</td>
         <td>{transaction.category.name}</td>
         <td>{transaction.amount}</td>
       </tr>
