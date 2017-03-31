@@ -27,7 +27,7 @@ const initialState = {
   transactions: {
     'uuid-1': {
       id: 'uuid-1',
-      date: 'date',
+      date: '2017/03/22',
       type: EXPENSE,
       categoryId: 'transportation',
       wallet: 'cash',
@@ -37,7 +37,7 @@ const initialState = {
     },
     'uuid-2': {
       id: 'uuid-2',
-      date: 'date',
+      date: '2017/03/26',
       type: INCOME,
       categoryId: SALARY,
       wallet: 'cash',
@@ -47,8 +47,8 @@ const initialState = {
     },
   },
   months: {
-    'year/month': {
-      id: 'year/month',
+    '2017/03': {
+      id: '2017/03',
       income: 20000, // cache
       expense: 200, // cache
       year: 2017,

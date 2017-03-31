@@ -23,8 +23,8 @@ test('test categoriesSelector', () => {
 });
 
 test('test transactionsSelector', () => {
-  const result = transactionsSelector(state, { month: 'year/month' });
-  expect(result.month.id).toEqual('year/month');
+  const result = transactionsSelector(state, { month: '2017/03' });
+  expect(result.month.id).toEqual('2017/03');
   expect(isArray(result.transactions)).toEqual(true);
 });
 

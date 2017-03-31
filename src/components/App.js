@@ -9,7 +9,12 @@ class App extends Component {
     months: PropTypes.array.isRequired
   };
 
-  state = { month: 'year/month' };
+  constructor(props) {
+    super(props);
+    this.state = {
+      month: props.months[0].id
+    };
+  }
 
   handleMonthChange = (event) => this.setState({ month: event.target.value });
 
