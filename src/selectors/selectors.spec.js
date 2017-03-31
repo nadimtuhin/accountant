@@ -30,14 +30,14 @@ test('test transactionsSelector', () => {
 
 test('test walletSelector', () => {
   const result = walletSelector(state, { walletId: 'cash' });
-  const expectedResult = state.wallets.items['cash'];
+  const expectedResult = state.wallet.items['cash'];
 
   expect(result).toEqual(expectedResult);
 });
 
 test('test defaultWalletSelector', () => {
   const result = defaultWalletSelector(state);
-  const expectedResult = state.wallets.items[state.wallets.order[0]];
+  const expectedResult = state.wallet.items[state.wallet.order[0]];
 
   expect(result).toEqual(expectedResult);
 });

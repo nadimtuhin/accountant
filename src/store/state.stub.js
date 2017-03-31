@@ -17,7 +17,7 @@ const initialState = {
       [SALARY]: { picture: 'D.png', name: 'Salary', id: SALARY },
     }
   },
-  wallets: {
+  wallet: {
     order: ['dbbl', 'cash'],
     items: {
       dbbl: { id: 'dbbl', name: 'DBBL', description: '', openingBalance: 0 },
