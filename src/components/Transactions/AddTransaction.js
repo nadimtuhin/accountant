@@ -53,7 +53,7 @@ class AddTransaction extends Component {
   };
 
   handleTypeChange = (event) => {
-    this.setState({ type: event.target.value});
+    this.setState({ type: event.target.value });
   };
 
   render() {
@@ -73,7 +73,7 @@ class AddTransaction extends Component {
           </div>
 
           <div className="form-group">
-            <input type="number" ref="amount"  className="form-control"/>
+            <input type="number" ref="amount" className="form-control" />
           </div>
 
           <div className="form-group">
@@ -81,7 +81,7 @@ class AddTransaction extends Component {
           </div>
 
           <div className="form-group">
-            <select name="category" ref="category"  className="form-control">
+            <select name="category" ref="category" className="form-control">
               { categories[type].map(this.renderCategory) }
             </select>
           </div>
