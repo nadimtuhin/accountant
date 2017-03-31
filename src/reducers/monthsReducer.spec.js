@@ -8,4 +8,5 @@ test('monthsReducer', () => {
   const months = monthsReducer(state.months, addTransaction(transaction));
 
   expect(months['2017/04'].transactions.includes(transaction.id)).toEqual(true);
+  expect(months['2017/04'].id).toEqual('2017/04');
 });

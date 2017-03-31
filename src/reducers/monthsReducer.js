@@ -15,6 +15,7 @@ export default function monthsReducer(state={}, { type, payload }) {
         return {
           ...state,
           [month]: {
+            id: month,
             transactions: [payload.transaction.id]
           }
         };
