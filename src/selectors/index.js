@@ -1,8 +1,11 @@
+import toArray from 'lodash/toArray';
 import { EXPENSE, INCOME, LDRD } from '../constants/terms';
 
 export const defaultWalletSelector = (state) => state.wallet.items[state.wallet.order[0]];
 export const walletsSelector = (state) => state.wallet.order.map(wallet => state.wallet.items[wallet]);
 export const walletSelector = (state, { walletId } ) => state.wallet.items[walletId];
+
+export const monthsSelector = (state) => toArray(state.months);
 
 export const categorySelector = (state, { categoryId }) => state.category.items[categoryId];
 
