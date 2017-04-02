@@ -59,13 +59,19 @@ const initialState = {
   event: {
     order: ['tour2017'],
     items: {
-      'tour2017': { name: 'Tour 2017', startDate: '1st January', endDate: '31st December' }
+      'tour2017': {
+        id: 's-uuid-1',
+        name: 'Tour 2017',
+        startDate: '1st January',
+        endDate: '31st December'
+      }
     }
   },
   budget: {
     order: ['b-uuid-1'],
     items: {
       'b-uuid-1': {
+        id: 's-uuid-1',
         category: 'transportation',
         amount: 2000,
         start: 'start/date',
@@ -77,6 +83,7 @@ const initialState = {
     order: ['s-uuid-1'],
     items: {
       's-uuid-1': {
+        id: 's-uuid-1',
         name: 'Kindle',
         description: 'buy kindle in 4 months',
         when: 'every1month',
