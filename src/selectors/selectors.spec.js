@@ -2,7 +2,7 @@ import isArray from 'lodash/isArray';
 import state from '../store/state.stub';
 import {
   categorySelector, categoriesSelector, transactionsSelector,
-  walletSelector, defaultWalletSelector, walletsSelector, monthsSelector
+  walletSelector, defaultWalletSelector, walletsSelector, monthsSelector, eventsSelector
 } from './index';
 import { EXPENSE, INCOME, LDRD, LOAN } from '../constants/terms';
 
@@ -43,13 +43,16 @@ test('test defaultWalletSelector', () => {
 });
 
 test('test walletsSelector', () => {
-    const result = walletsSelector(state);
-    const expectedResult = true;
-    expect(isArray(result)).toEqual(expectedResult);
+  const result = walletsSelector(state);
+  expect(isArray(result)).toEqual(true);
 });
 
 test('test monthsSelector', () => {
-    const result = monthsSelector(state.months);
-    const expectedResult = true;
-    expect(isArray(result)).toEqual(expectedResult);
+  const result = monthsSelector(state);
+  expect(isArray(result)).toEqual(true);
+});
+
+test('test eventsSelector', () => {
+  const result = eventsSelector(state);
+  expect(isArray(result)).toEqual(true);
 });
