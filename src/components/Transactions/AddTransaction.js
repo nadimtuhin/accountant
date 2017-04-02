@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { categoriesSelector, walletsSelector } from '../../selectors/index';
+import { categoriesSelector, eventsSelector, walletsSelector } from '../../selectors/index';
 import { EXPENSE, INCOME, LDRD } from '../../constants/terms';
 import uuid from 'uuid';
 import { bindActionCreators } from 'redux';
@@ -10,6 +10,7 @@ class AddTransaction extends Component {
   static propTypes = {
     categories: PropTypes.object.isRequired,
     wallets: PropTypes.array.isRequired,
+    events: PropTypes.array.isRequired,
     addTransaction: PropTypes.func.isRequired
   };
 
@@ -19,6 +20,14 @@ class AddTransaction extends Component {
     return (
       <option value={category.id} key={category.id}>
         { category.name }
+      </option>
+    )
+  };
+
+  renderEvent = (event) => {
+    return (
+      <option value={event.id} key={event.id}>
+        { event.name }
       </option>
     )
   };
@@ -36,11 +45,12 @@ class AddTransaction extends Component {
     const remarks = this.remarks.value;
     const walletId = this.walletId.value;
     const categoryId = this.category.value;
+    const eventId = this.eventId.value;
 
     const transaction = {
       id: uuid(),
       date: new Date(),
-      eventId: null,
+      eventId,
       walletId,
       categoryId,
       remarks,
@@ -53,7 +63,7 @@ class AddTransaction extends Component {
   handleTypeChange = (event) => this.setState({ type: event.target.value });
 
   render() {
-    const { categories, wallets } = this.props;
+    const { categories, wallets, events } = this.props;
     const { type } = this.state;
 
     return (
@@ -63,6 +73,12 @@ class AddTransaction extends Component {
           <div className="form-group">
             <select  ref={n => this.walletId = n} className="form-control">
               { wallets.map(this.renderWallet) }
+            </select>
+          </div>
+
+          <div className="form-group">
+            <select  ref={n => this.eventId = n} className="form-control">
+              { events.map(this.renderEvent) }
             </select>
           </div>
 
@@ -97,7 +113,8 @@ class AddTransaction extends Component {
 
 export default connect(state => ({
   categories: categoriesSelector(state),
-  wallets: walletsSelector(state)
+  wallets: walletsSelector(state),
+  events: eventsSelector(state),
 }), bindActionCreators.bind(null, {
   addTransaction
 }))(AddTransaction);
