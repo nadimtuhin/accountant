@@ -36,7 +36,9 @@ Personal Accountant to manage your day to day finance.
 - [ ] edit savings
 - [ ] remove savings
 
-# graphs
+### graphs
+
+### reports
 
 ### settings
 - [ ] enable travel mode
