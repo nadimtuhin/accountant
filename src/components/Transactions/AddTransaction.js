@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { categoriesSelector, defaultWalletSelector } from '../../selectors/index';
+import { categoriesSelector, walletsSelector } from '../../selectors/index';
 import { EXPENSE, INCOME, LDRD } from '../../constants/terms';
 import uuid from 'uuid';
 import { bindActionCreators } from 'redux';
@@ -9,6 +9,7 @@ import { addTransaction } from '../../actions/transactionActionCreators';
 class AddTransaction extends Component {
   static propTypes = {
     categories: PropTypes.object.isRequired,
+    wallets: PropTypes.array.isRequired,
     addTransaction: PropTypes.func.isRequired
   };
 
@@ -22,48 +23,49 @@ class AddTransaction extends Component {
     )
   };
 
-  handleAdd = () => {
-    const amount = this.refs.amount.value;
-    const remarks = this.refs.remarks.value;
-    const categoryId = this.refs.category.value;
+  renderWallet = (wallet) => {
+    return (
+      <option value={wallet.id} key={wallet.id}>
+        { wallet.name }
+      </option>
+    )
+  };
 
-    // 'uuid-1': {
-    //   id: 'uuid-1',
-    //     date: 'date',
-    //     type: EXPENSE,
-    //     categoryId: 'transportation',
-    //     wallet: 'cash',
-    //     amount: 200,
-    //     remark: 'pathao ride to office',
-    //     event: 'tour2017'
-    // },
+  handleAdd = () => {
+    const amount = this.amount.value;
+    const remarks = this.remarks.value;
+    const walletId = this.walletId.value;
+    const categoryId = this.category.value;
 
     const transaction = {
       id: uuid(),
-      wallet: this.props.wallet,
       date: new Date(),
-      event: null,
+      eventId: null,
+      walletId,
+      categoryId,
       remarks,
       amount,
-      categoryId,
     };
 
-    console.log(transaction);
     this.props.addTransaction(transaction);
   };
 
-  handleTypeChange = (event) => {
-    this.setState({ type: event.target.value });
-  };
+  handleTypeChange = (event) => this.setState({ type: event.target.value });
 
   render() {
-    const { categories } = this.props;
+    const { categories, wallets } = this.props;
     const { type } = this.state;
 
     return (
       <div className="AddTransaction">
         <h3>Add new transaction</h3>
         <div className="form">
+          <div className="form-group">
+            <select  ref={n => this.walletId = n} className="form-control">
+              { wallets.map(this.renderWallet) }
+            </select>
+          </div>
+
           <div className="form-group">
             <select name="type" onChange={this.handleTypeChange} className="form-control">
               <option value={EXPENSE}>{EXPENSE}</option>
@@ -73,15 +75,15 @@ class AddTransaction extends Component {
           </div>
 
           <div className="form-group">
-            <input type="number" ref="amount" className="form-control" />
+            <input type="number"  ref={n => this.amount = n} className="form-control" />
           </div>
 
           <div className="form-group">
-            <textarea ref="remarks" className="form-control" />
+            <textarea ref={n => this.remarks = n} className="form-control" />
           </div>
 
           <div className="form-group">
-            <select name="category" ref="category" className="form-control">
+            <select name="category" ref={n => this.category = n} className="form-control">
               { categories[type].map(this.renderCategory) }
             </select>
           </div>
@@ -95,7 +97,7 @@ class AddTransaction extends Component {
 
 export default connect(state => ({
   categories: categoriesSelector(state),
-  wallet: defaultWalletSelector(state),
+  wallets: walletsSelector(state)
 }), bindActionCreators.bind(null, {
   addTransaction
 }))(AddTransaction);
