@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { categoriesSelector, eventsSelector, walletsSelector } from '../../selectors/index';
 import { EXPENSE, INCOME, LDRD } from '../../constants/terms';
 import uuid from 'uuid';
-import { bindActionCreators } from 'redux';
-import { addTransaction } from '../../actions/transactionActionCreators';
 
 class AddTransaction extends Component {
   static propTypes = {
@@ -115,6 +113,4 @@ export default connect(state => ({
   categories: categoriesSelector(state),
   wallets: walletsSelector(state),
   events: eventsSelector(state),
-}), bindActionCreators.bind(null, {
-  addTransaction
 }))(AddTransaction);

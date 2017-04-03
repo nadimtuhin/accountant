@@ -1,8 +1,14 @@
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Transaction from './Transaction';
 import { transactionsSelector } from '../../selectors/index';
 import AddTransaction from './AddTransaction';
+import {
+  addTransaction,
+  removeTransaction,
+  updateTransaction
+} from '../../actions/transactionActionCreators';
 
 class Transactions extends Component {
   static propTypes = {
@@ -11,13 +17,20 @@ class Transactions extends Component {
   };
 
   renderTransaction = (transaction) => {
+    const { removeTransaction, updateTransaction } = this.props;
+
     return (
-      <Transaction key={transaction.id} transaction={transaction} />
+      <Transaction
+        key={transaction.id}
+        transaction={transaction}
+        removeTransaction={removeTransaction}
+        updateTransaction={updateTransaction}
+      />
     );
   };
 
   render() {
-    const { month, transactions } = this.props;
+    const { month, transactions, addTransaction } = this.props;
 
     return (
       <div>
@@ -30,11 +43,15 @@ class Transactions extends Component {
           </table>
         </div>
         <div className="col-md-6">
-          <AddTransaction />
+          <AddTransaction addTransaction={addTransaction} />
         </div>
       </div>
     );
   }
 }
 
-export default connect(transactionsSelector)(Transactions);
+export default connect(transactionsSelector, bindActionCreators.bind(null, {
+  updateTransaction,
+  removeTransaction,
+  addTransaction
+}))(Transactions);
