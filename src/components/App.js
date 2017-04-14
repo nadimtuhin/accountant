@@ -2,34 +2,37 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Transactions from './Transactions';
 import { monthsSelector } from '../selectors/index';
+import { changeMonth } from '../actions/settingsActionCreators';
 
 
 class App extends Component {
   static propTypes = {
-    months: PropTypes.array.isRequired
+    months: PropTypes.array.isRequired,
+    month: PropTypes.string.isRequired,
+    changeMonth: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      month: props.months[0].id
-    };
-  }
-
-  handleMonthChange = (event) => this.setState({ month: event.target.value });
+  handleMonthChange = (event) => this.props.changeMonth(event.target.value);
 
   render() {
     return (
       <div className="App">
-        <select onChange={this.handleMonthChange} value={this.state.month}>
+        <select onChange={this.handleMonthChange} value={this.props.month}>
           { this.props.months.map(month => <option value={month.id} key={month.id}>{month.id}</option>)}
         </select>
-        <Transactions month={this.state.month} />
+        <Transactions month={this.props.month} />
       </div>
     );
   }
 }
 
+function monthViewSelector(state) {
+  return state.settings.monthView;
+}
+
 export default connect(state => ({
-  months: monthsSelector(state)
-}))(App);
+  months: monthsSelector(state),
+  month: monthViewSelector(state),
+}), {
+  changeMonth
+})(App);
