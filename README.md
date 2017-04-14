@@ -8,7 +8,7 @@ Personal Accountant to manage your day to day finance.
 ### transaction
 - [x] add transaction
 - [x] show transactions
-- [ ] remove transaction
+- [x] remove transaction
 - [ ] edit transaction
 - [ ] add date while adding transactions
 
