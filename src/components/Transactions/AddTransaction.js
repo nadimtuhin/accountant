@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { EXPENSE, INCOME, LDRD } from '../../constants/terms';
 import uuid from 'uuid';
 
@@ -43,16 +42,19 @@ class AddTransaction extends Component {
     const walletId = this.walletId.value;
     const categoryId = this.category.value;
     const eventId = this.eventId.value;
+    const date = this.date.value || new Date();
 
     const transaction = {
       id: uuid(),
-      date: new Date(),
+      date,
       eventId,
       walletId,
       categoryId,
       remarks,
       amount,
     };
+
+    if(!amount) return;
 
     this.props.addTransaction(transaction);
   };
@@ -92,6 +94,10 @@ class AddTransaction extends Component {
           </div>
 
           <div className="form-group">
+            <input type="date" ref={n => this.date = n} className="form-control" />
+          </div>
+
+          <div className="form-group">
             <textarea ref={n => this.remarks = n} className="form-control" />
           </div>
 
@@ -108,4 +114,4 @@ class AddTransaction extends Component {
   }
 }
 
-export default connect(state => ({}))(AddTransaction);
+export default AddTransaction;
