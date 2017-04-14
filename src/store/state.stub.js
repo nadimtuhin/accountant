@@ -93,6 +93,7 @@ const initialState = {
   },
   settings: {
     travelMode: false,
+    monthView: '2017/03'
   }
 };
 
