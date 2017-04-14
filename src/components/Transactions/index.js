@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Transaction from './Transaction';
 import { transactionsSelector } from '../../selectors/index';
@@ -50,8 +49,8 @@ class Transactions extends Component {
   }
 }
 
-export default connect(transactionsSelector, bindActionCreators.bind(null, {
+export default connect(transactionsSelector, {
   updateTransaction,
   removeTransaction,
   addTransaction
-}))(Transactions);
+})(Transactions);
