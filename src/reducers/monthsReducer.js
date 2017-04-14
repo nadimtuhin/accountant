@@ -1,34 +1,50 @@
 import u from 'immutability-helper';
-import moment from 'moment';
-import { ADD_TRANSACTION } from '../constants/actionTypes';
+import remove from 'lodash/fp/remove';
+import isEqual from 'lodash/fp/isEqual';
+import { ADD_TRANSACTION, REMOVE_TRANSACTION } from '../constants/actionTypes';
+import getMonthName from './lib/getMonthName';
 
-function getMonthName(date) {
-  return moment(date).format('YYYY/MM');
-}
 
-export default function monthsReducer(state={}, { type, payload }) {
+export default function monthsReducer(state = {}, { type, payload }) {
   switch (type) {
     case ADD_TRANSACTION: {
-      const month = getMonthName(payload.transaction.date);
+      const { id, date } = payload.transaction;
+      const month = getMonthName(date);
 
-      if(!state[month]) {
+      // if there is no month already
+      if (!state[month]) {
         return {
           ...state,
           [month]: {
             id: month,
-            transactions: [payload.transaction.id]
+            transactions: [id]
           }
         };
       }
 
+      // add transaction to a existing month
       return u(state, {
         [month]: {
           transactions: {
-            $push: [payload.transaction.id]
+            $push: [id]
           }
         }
       });
     }
+
+    case REMOVE_TRANSACTION: {
+      const { id, date } = payload.transaction;
+      const month = getMonthName(date);
+
+      return u(state, {
+        [month]: {
+          transactions: {
+            $apply: remove(isEqual(id))
+          }
+        }
+      });
+    }
+
     default:
       return state;
   }

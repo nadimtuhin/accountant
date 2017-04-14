@@ -1,4 +1,5 @@
-import { ADD_TRANSACTION } from '../constants/actionTypes';
+import { ADD_TRANSACTION, REMOVE_TRANSACTION } from '../constants/actionTypes';
+import omit from 'lodash/omit';
 
 export default function transactionsReducer(state={}, { type, payload }) {
   switch (type) {
@@ -7,6 +8,10 @@ export default function transactionsReducer(state={}, { type, payload }) {
         ...state,
         [payload.transaction.id]: payload.transaction
       };
+
+    case REMOVE_TRANSACTION:
+      return omit(state, payload.transaction.id);
+
     default:
       return state;
   }
