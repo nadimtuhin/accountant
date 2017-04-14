@@ -8,7 +8,7 @@ class Transaction extends Component {
   };
 
   handleUpdate = () => this.props.updateTransaction(this.props.transaction.id);
-  handleRemove = () => this.props.removeTransaction(this.props.transaction.id);
+  handleRemove = () => this.props.removeTransaction(this.props.transaction);
 
   render() {
     const { transaction } = this.props;
