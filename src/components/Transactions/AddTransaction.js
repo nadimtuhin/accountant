@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { categoriesSelector, eventsSelector, walletsSelector } from '../../selectors/index';
 import { EXPENSE, INCOME, LDRD } from '../../constants/terms';
 import uuid from 'uuid';
 
@@ -69,13 +68,13 @@ class AddTransaction extends Component {
         <h3>Add new transaction</h3>
         <div className="form">
           <div className="form-group">
-            <select  ref={n => this.walletId = n} className="form-control">
+            <select ref={n => this.walletId = n} className="form-control">
               { wallets.map(this.renderWallet) }
             </select>
           </div>
 
           <div className="form-group">
-            <select  ref={n => this.eventId = n} className="form-control">
+            <select ref={n => this.eventId = n} className="form-control">
               { events.map(this.renderEvent) }
             </select>
           </div>
@@ -89,7 +88,7 @@ class AddTransaction extends Component {
           </div>
 
           <div className="form-group">
-            <input type="number"  ref={n => this.amount = n} className="form-control" />
+            <input type="number" ref={n => this.amount = n} className="form-control" />
           </div>
 
           <div className="form-group">
@@ -109,8 +108,4 @@ class AddTransaction extends Component {
   }
 }
 
-export default connect(state => ({
-  categories: categoriesSelector(state),
-  wallets: walletsSelector(state),
-  events: eventsSelector(state),
-}))(AddTransaction);
+export default connect(state => ({}))(AddTransaction);
