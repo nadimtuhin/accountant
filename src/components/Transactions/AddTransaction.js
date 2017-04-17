@@ -1,6 +1,32 @@
 import React, { Component, PropTypes } from 'react';
-import { EXPENSE, INCOME, LDRD } from '../../constants/terms';
 import uuid from 'uuid';
+import moment from 'moment';
+import { EXPENSE, INCOME, LDRD } from '../../constants/terms';
+import Input from '../Editor/Input';
+import Select from '../Editor/Select';
+
+/**
+ * TODO: write a spec for this
+ * @param props
+ */
+export const getDefaultDataFromProps = (props)  => ({
+    categoryId: props.categories[EXPENSE][0].id,
+    date: moment().format('YYYY-MM-DD'),
+    walletId: props.wallets[0].id,
+    categoryType: EXPENSE,
+    amount: 0,
+    remarks: '',
+    eventId: '',
+});
+
+/**
+ * Transaction category types
+ */
+const categoryTypes = [
+  { id: EXPENSE, name: EXPENSE },
+  { id: LDRD, name: 'LOAN & DEBT' },
+  { id: INCOME, name: INCOME }
+];
 
 class AddTransaction extends Component {
   static propTypes = {
@@ -10,43 +36,23 @@ class AddTransaction extends Component {
     addTransaction: PropTypes.func.isRequired
   };
 
-  state = { type: EXPENSE };
+  constructor(props) {
+    super(props);
+    this.state = getDefaultDataFromProps(props);
+  }
 
-  renderCategory = (category) => {
-    return (
-      <option value={category.id} key={category.id}>
-        { category.name }
-      </option>
-    )
-  };
-
-  renderEvent = (event) => {
-    return (
-      <option value={event.id} key={event.id}>
-        { event.name }
-      </option>
-    )
-  };
-
-  renderWallet = (wallet) => {
-    return (
-      <option value={wallet.id} key={wallet.id}>
-        { wallet.name }
-      </option>
-    )
+  setValueOf = (name) => {
+    return (e) => this.setState({
+      [name]: e.target.value
+    });
   };
 
   handleAdd = () => {
-    const amount = this.amount.value;
-    const remarks = this.remarks.value;
-    const walletId = this.walletId.value;
-    const categoryId = this.category.value;
-    const eventId = this.eventId.value;
-    const date = this.date.value || new Date();
+    const { amount, date, remarks, categoryId, walletId, eventId } = this.state;
 
     const transaction = {
       id: uuid(),
-      date,
+      date: date || new Date(),
       eventId,
       walletId,
       categoryId,
@@ -54,58 +60,50 @@ class AddTransaction extends Component {
       amount,
     };
 
-    if(!amount) return;
+    if (!amount) return;
 
     this.props.addTransaction(transaction);
+    this.setState(getDefaultDataFromProps(this.props));
   };
-
-  handleTypeChange = (event) => this.setState({ type: event.target.value });
 
   render() {
     const { categories, wallets, events } = this.props;
-    const { type } = this.state;
+    const { amount, date, categoryType, eventId, walletId, categoryId } = this.state;
 
     return (
       <div className="AddTransaction">
         <h3>Add new transaction</h3>
         <div className="form">
-          <div className="form-group">
-            <select ref={n => this.walletId = n} className="form-control">
-              { wallets.map(this.renderWallet) }
-            </select>
-          </div>
+          <Select
+            onChange={this.setValueOf('eventId')}
+            value={eventId}
+            options={events}
+          />
+
+          <Select
+            onChange={this.setValueOf('walletId')}
+            value={walletId}
+            options={wallets}
+          />
+
+          <Select
+            onChange={this.setValueOf('categoryType')}
+            value={categoryType}
+            options={categoryTypes}
+          />
+
+          <Input type='number' onChange={ this.setValueOf('amount') } value={amount} />
+          <Input type='date' onChange={ this.setValueOf('date') } value={date} />
 
           <div className="form-group">
-            <select ref={n => this.eventId = n} className="form-control">
-              { events.map(this.renderEvent) }
-            </select>
+            <textarea onChange={this.setValueOf('remarks')} className="form-control" />
           </div>
 
-          <div className="form-group">
-            <select name="type" onChange={this.handleTypeChange} className="form-control">
-              <option value={EXPENSE}>{EXPENSE}</option>
-              <option value={LDRD}>LOAN & DEBT</option>
-              <option value={INCOME}>{INCOME}</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <input type="number" ref={n => this.amount = n} className="form-control" />
-          </div>
-
-          <div className="form-group">
-            <input type="date" ref={n => this.date = n} className="form-control" />
-          </div>
-
-          <div className="form-group">
-            <textarea ref={n => this.remarks = n} className="form-control" />
-          </div>
-
-          <div className="form-group">
-            <select name="category" ref={n => this.category = n} className="form-control">
-              { categories[type].map(this.renderCategory) }
-            </select>
-          </div>
+          <Select
+            onChange={this.setValueOf('categoryId')}
+            value={categoryId}
+            options={categories[categoryType]}
+          />
         </div>
 
         <button className="btn btn-block" onClick={this.handleAdd}>Add</button>
